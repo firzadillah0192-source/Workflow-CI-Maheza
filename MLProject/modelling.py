@@ -4,8 +4,6 @@
 # ==========================================
 
 import pandas as pd
-import mlflow
-import mlflow.sklearn
 import joblib
 
 from sklearn.model_selection import train_test_split
@@ -62,15 +60,6 @@ print("Shape Train :", X_train.shape)
 print("Shape Test  :", X_test.shape)
 
 # ==========================================
-# MLFLOW
-# ==========================================
-
-mlflow.set_experiment("Sentiment_Analysis_Indonesia")
-
-# Matikan autolog agar lebih stabil di GitHub Actions
-# mlflow.sklearn.autolog()
-
-# ==========================================
 # TRAIN MODEL
 # ==========================================
 
@@ -94,21 +83,6 @@ print()
 print("=" * 50)
 print(f"AKURASI MODEL : {accuracy:.4f}")
 print("=" * 50)
-
-# ==========================================
-# LOG KE MLFLOW
-# ==========================================
-
-mlflow.log_param("model", "LogisticRegression")
-mlflow.log_param("max_iter", 3000)
-mlflow.log_param("C", 2.0)
-
-mlflow.log_metric("accuracy", accuracy)
-
-mlflow.sklearn.log_model(
-    sk_model=model,
-    artifact_path="model"
-)
 
 # ==========================================
 # SAVE MODEL
