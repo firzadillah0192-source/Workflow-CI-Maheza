@@ -4,6 +4,8 @@
 # ==========================================
 
 import pandas as pd
+import mlflow
+import mlflow.sklearn
 import joblib
 
 from sklearn.model_selection import train_test_split
@@ -58,6 +60,15 @@ X_test = tfidf.transform(X_test)
 
 print("Shape Train :", X_train.shape)
 print("Shape Test  :", X_test.shape)
+
+# ==========================================
+# MLFLOW AUTOLOG
+# ==========================================
+
+mlflow.sklearn.autolog(
+    log_models=True,
+    silent=True
+)
 
 # ==========================================
 # TRAIN MODEL
